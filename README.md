@@ -1,4 +1,4 @@
-<h3>JSONCS - Very simple JSON parser in C#</h3>
+<h3>JSONCS - Quick and simple JSON parser in C#</h3>
 This quick and simple parser will convert json strings into C# generic dictionaries and lists.
 
 <b>Example JSON and C# code:</b>
