@@ -2,24 +2,8 @@
 
 public class JSON {
 
-	public JSON () {}
-
-	public static JSON Parse ( ref string json ) {
-
-		JSONObject jsonObject = new JSONObject( new Dictionary< string, JSON >() );
-		
-		for ( int i = 0; i < json.Length; i++ ) {
-			
-			if ( json[ i ] == ':' ) {
-				
-				string key = ParseKey( ref json, i - 1 );
-				JSON value = ParseValue( ref json, ref i );
-				
-				jsonObject.Add( key, value );
-			}
-		}
-
-		return jsonObject;
+	public static JSON Parse ( ref string json, int start = 0 ) {
+		return new JSONObject( ParseObject( ref json, ref start ) );
 	}
 
 	private static string ParseKey ( ref string json, int i ) {
@@ -250,6 +234,14 @@ public class JSONNumber : JSON {
 	
 	public JSONNumber ( double value ) {
 		this.value = value;
+	}
+
+	public static implicit operator string( JSONNumber json ) {
+		return ( json as JSONNumber ).value.ToString();
+	}
+
+	public static implicit operator JSONNumber( string str ) {
+		return new JSONNumber( double.Parse( str ) );
 	}
 	
 	public double value;
